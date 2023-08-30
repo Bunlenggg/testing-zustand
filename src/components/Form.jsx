@@ -5,9 +5,10 @@ const Form = () => {
   const inputRef = useRef(null);
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (inputRef.current.value.trim() === "") return;
     setTasks(inputRef.current.value);
+    inputRef.current.value = "";
   };
-
   return (
     <>
       <form onSubmit={handleSubmit}>

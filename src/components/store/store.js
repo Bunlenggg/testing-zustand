@@ -8,12 +8,13 @@ export const MyStore = create((set) => ({
     })),
 
   // new state
-  tasks: [{ id: 1, title: "My List", isDone: false }],
-  setTasks: (value) =>
-    set((state) => ({
-      tasks: [
-        ...state.tasks,
-        { id: Math.random(), title: value, isDone: false },
-      ],
-    })),
+  tasks: [],
+  setTasks: (value) => set((state) => ({
+    tasks: [...state.tasks, {id: Math.random(), title:value, isDone : false}]
+  })),
+
+  // delete
+  setDelete: (id) =>set((state) =>({
+    tasks: state.tasks.filter(each => each.id !== id) 
+  })) 
 }));
