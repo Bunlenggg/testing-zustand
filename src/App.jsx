@@ -5,7 +5,13 @@ import Form from "./components/Form";
 import Delete from "./components/Delete";
 
 function App() {
-  const { count, tasks } = MyStore();
+  const { count, tasks, setEditTitle, setEditID, isOpen, setOpen, editTitle } =
+    MyStore();
+  const catchOldInfo = (id, title) => {
+    setEditTitle(title);
+    setEditID(id);
+    setOpen();
+  };
   return (
     <>
       <Form />
@@ -14,10 +20,19 @@ function App() {
       <ul>
         {tasks.map((each) => (
           <li key={each.id}>
-            {each.title} <Delete id={each.id} />
+            {each.title} <Delete id={each.id} />{" "}
+            <button onClick={() => catchOldInfo(each.id, each.title)}>
+              Edit
+            </button>
           </li>
         ))}
       </ul>
+      {isOpen && (
+        <form>
+          <input defaultValue={editTitle} type="text" />
+          <button>Update</button>
+        </form>
+      )}
     </>
   );
 }
